@@ -1,0 +1,19 @@
+{
+  "name": "bestami",
+  "version": "2.0.0",
+  "description": "bestami",
+  "main": "index.js",
+  "scripts": {
+    "start": "backpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harun Akgün",
+  "license": "ISC",
+  "dependencies": {
+    "@keyv/redis": "^1.3.8",
+    "backpack-core": "^0.4.3",
+    "botkit": "^0.6.7",
+    "get-json": "^1.0.0",
+    "keyv": "^3.0.0"
+  }
+}
