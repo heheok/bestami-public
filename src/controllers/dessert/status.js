@@ -31,7 +31,7 @@ export default async (bot, message) => {
   const gif = imageList[Math.floor(Math.random() * imageList.length)];
   return bot.reply(
     message,
-    `Bu iş yerinde ${getDaysHoursMinsSecs(lastBought)} şöbiyet görülmedi...\n` +
+    `Bu iş yerinde ${getDaysHoursMinsSecs(lastBought)} tatlı görülmedi...\n` +
       `<${gif}|.>`
   );
 };
