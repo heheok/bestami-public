@@ -1,13 +1,13 @@
-import redisClient from '../../redis';
+import redisClient from "../../redis";
 
 export default async (bot, message) => {
-  const userList = await redisClient.get('desert-list');
+  const userList = await redisClient.get("desert-list");
   if (!userList) {
-    return bot.reply(message, 'Liste boş.');
+    return bot.reply(message, "Liste boş.");
   } else {
     const replyString = userList
       .map((userName, index) => `*${index + 1}* - ${userName}`)
-      .join('\n');
-    bot.reply(message, `Şöbiyet alacak kahramanlar;\n${replyString}`);
+      .join("\n");
+    bot.reply(message, `Tatlı alacak kahramanlar;\n${replyString}`);
   }
 };

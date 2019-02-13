@@ -2,6 +2,6 @@
 
 - `Yardım (DONE)`
 - `Hava Durumu (DONE)`
-- `Şöbiyet Listesi (DONE)`
-- `Şöbiyet Ekle (DONE)`
-- `Şöbiyet Alanı Tebrik et listeden çıkar (DONE)`
+- `Tatlı Listesi (DONE)`
+- `Tatlı Ekle (DONE)`
+- `Tatlı Alanı Tebrik et listeden çıkar (DONE)`

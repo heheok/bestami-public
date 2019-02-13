@@ -22,7 +22,7 @@ export default async (bot, message) => {
     if (!userList) {
       return bot.reply(
         message,
-        "Şöbiyet almasını beklediğimiz kimse yoktu ki..."
+        "Tatlı almasını beklediğimiz kimse yoktu ki..."
       );
     } else {
       await redisClient.set(
@@ -34,7 +34,7 @@ export default async (bot, message) => {
       if (!userInList) {
         return bot.reply(
           message,
-          `Şöbiyet almanı beklemiyorduk, ama yine de aldın, kahramanımızsın ${userToRemove}.\n <${gif}|.>`
+          `Tatlı almanı beklemiyorduk, ama yine de aldın, kahramanımızsın ${userToRemove}.\n <${gif}|.>`
         );
       } else {
         const newList = userList.filter(user => user != userToRemove);
@@ -45,7 +45,7 @@ export default async (bot, message) => {
         }
         return bot.reply(
           message,
-          `Şöbiyetimizi aldığın için çok teşekkürler  ${userToRemove}, kahramanımızsın. \n <${gif}|.>`
+          `Tatlı aldığın için çok teşekkürler  ${userToRemove}, kahramanımızsın. \n <${gif}|.>`
         );
       }
     }

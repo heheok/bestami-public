@@ -20,7 +20,7 @@ export default async (bot, message) => {
     const gif = imageList[Math.floor(Math.random() * imageList.length)];
     return bot.reply(
       message,
-      `Şöbiyet alma sırası sende ${userName}. \n` + `<${gif}|.>`
+      `Tatlı alma sırası sende ${userName}. \n` + `<${gif}|.>`
     );
   }
 };

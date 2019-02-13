@@ -1,5 +1,6 @@
 import controller from "./controller";
-import helpController from "./controllers/help";
+import helpController from "./controllers/help/help";
+import deprecatedController from "./controllers/help/deprecated";
 import weatherController from "./controllers/weather/weather";
 import dessertAddController from "./controllers/dessert/add";
 import dessertListController from "./controllers/dessert/list";
@@ -22,16 +23,18 @@ var listensFor = "message_received,ambient";
 
 controller.hears("^yard[ıi]m$", listensFor, helpController);
 controller.hears("^hava durumu$", listensFor, weatherController);
-controller.hears("^[sş][oö]biyet ekle (.*)", listensFor, dessertAddController);
-controller.hears("^[sşSŞ][oö]biyet listele$", listensFor, dessertListController);
+controller.hears("^[SŞsş][oö]biyet", listensFor, deprecatedController);
+
+controller.hears("^[Tt]atl[ıi] ekle (.*)", listensFor, dessertAddController);
+controller.hears("^[Tt]atl[ıi] listele$", listensFor, dessertListController);
 controller.hears(
-  "^[sşSŞ][oö]biyet s[ıi]radaki$",
+  "^[Tt]atl[ıi] s[ıi]radaki$",
   listensFor,
   dessertNextController
 );
-controller.hears("^[sşSŞ][oö]biyet durum$", listensFor, dessertStatusController);
+controller.hears("^[Tt]atl[ıi] durum$", listensFor, dessertStatusController);
 controller.hears(
-  "^[sş][oö]biyet al[ıi]nd[ıi] (.*)",
+  "^[Tt]atl[ıi] al[ıi]nd[ıi] (.*)",
   listensFor,
   dessertRemoveController
 );

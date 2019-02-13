@@ -13,7 +13,7 @@ export default async (bot, message) => {
       }
       await redisClient.set("desert-list", [...userList, userToAdd]);
     }
-    bot.reply(message, `${userToAdd} şöbiyet listesine eklendin.`);
+    bot.reply(message, `${userToAdd} Tatlı listesine eklendin.`);
   } else {
     bot.reply(message, `Hangi scottyzen'i ekliyoruz?`);
   }
