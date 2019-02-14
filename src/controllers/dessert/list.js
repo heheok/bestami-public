@@ -1,6 +1,6 @@
 import redisClient from "../../redis";
 
-export default async (bot, message) => {
+export const dessertList = async (bot, message) => {
   const userList = await redisClient.get("desert-list");
   if (!userList) {
     return bot.reply(message, "Liste boş.");
