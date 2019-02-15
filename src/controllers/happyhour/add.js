@@ -1,8 +1,6 @@
 import redisClient from "../../redis";
 import { getDaysHoursMinsSecs } from "../../utils/datettime";
 
-const yes = false;
-
 const NEXT_HAPPYHOUR_KEY = "happy-hour-next";
 
 const setNextDate = async dateToAdd => {
@@ -13,9 +11,7 @@ const setNextDate = async dateToAdd => {
   const partyTimeStamp = Math.floor(
     new Date(`${yyyy}-${aa}-${gg} ${hh}:${mm}:00.000`).getTime() / 1000
   );
-  console.log(`${yyyy}-${aa}-${gg} ${hh}:${mm}`);
   const currentTimeStamp = new Date().getTime() / 1000;
-  console.log(currentTimeStamp > partyTimeStamp);
   if (currentTimeStamp > partyTimeStamp) {
     return false;
   } else {
@@ -29,7 +25,6 @@ export const happyHourAdd = async (bot, message) => {
   const currentTimeStamp = new Date().getTime() / 1000;
 
   if (dateToAdd) {
-    //check date formatting
     const dateRegEx = /\d{1,2}[/]\d{1,2}[/]\d{4} \d{2}:\d{2}/;
     const matchedDate = dateToAdd.match(dateRegEx);
 
@@ -39,19 +34,14 @@ export const happyHourAdd = async (bot, message) => {
         `Verdiğin tarihin formatını anlayamadım. GG/AA/YYYY HH:MM formatında tekrar dener misin? ${matchedDate}`
       );
     } else {
-      //check if there is already a date on redis
       const presetHappyHourDate = parseInt(
         await redisClient.get(NEXT_HAPPYHOUR_KEY)
       );
       if (presetHappyHourDate && currentTimeStamp < presetHappyHourDate) {
-        const timeLeftToNext = Math.floor(
-          presetHappyHourDate - currentTimeStamp
-        );
-        //ask if user wants to update it
         bot.startConversation(message, function(err, convo) {
           convo.addQuestion(
-            `Daha önce başka bir tarih belirlenmiş, bu bilgiye göre sıradaki happy hour ${getDaysHoursMinsSecs(
-              timeLeftToNext
+            `Daha önce başka bir tarih belirlenmiş, bu bilgiye göre sıradaki happy hour ${getToDaysHoursMinsSecs(
+              Math.abs(presetHappyHourDate)
             )} sonra yapılacak. Güncellemek ister misiniz? (Evet/Hayır)`,
             async ({ text }, convo) => {
               switch (text) {
@@ -72,6 +62,11 @@ export const happyHourAdd = async (bot, message) => {
                 case "Hayir":
                   convo.say("Tamamdır, bir değişiklik yapmadım.");
                   break;
+                default:
+                  convo.say(
+                    "Sadece evet/hayır komutunu anlayabiliyorum. Tekrar başlaman gerekecek."
+                  );
+                  break;
               }
               convo.next();
             },
@@ -80,7 +75,6 @@ export const happyHourAdd = async (bot, message) => {
           );
         });
       } else {
-        // no date on redis or the date is in the past
         const dateSet = setNextDate(dateToAdd);
         if (dateSet) {
           return bot.reply(message, `Teşekkür ederim, tarihi kaydettim.`);

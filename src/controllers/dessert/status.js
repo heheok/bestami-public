@@ -1,6 +1,6 @@
 import redisClient from "../../redis";
 import { emotes } from "../../media/emotes";
-import { getDaysHoursMinsSecs } from "../../utils/datettime";
+import { getPassedDaysHoursMinsSecs } from "../../utils/datettime";
 
 export const dessertStatus = async (bot, message) => {
   const imageList = emotes.dessertStatus;
@@ -8,8 +8,9 @@ export const dessertStatus = async (bot, message) => {
   const gif = imageList[Math.floor(Math.random() * imageList.length)];
   return bot.reply(
     message,
-    `Bu iş yerinde ${getDaysHoursMinsSecs(
-      lastBought
+    `Bu iş yerinde ${getPassedDaysHoursMinsSecs(
+      lastBought,
+      true
     )}'dir tatlı görülmedi...\n` + `<${gif}|.>`
   );
 };

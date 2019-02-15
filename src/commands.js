@@ -7,7 +7,7 @@ import {
   dessertRemove,
   dessertStatus
 } from "./controllers/dessert";
-import { happyHourAdd } from "./controllers/happyhour";
+import { happyHourAdd, happyHourNext } from "./controllers/happyhour";
 
 const listensFor = "message_received,ambient";
 
@@ -53,8 +53,18 @@ export const commands = [
     targetController: dessertRemove
   },
   {
-    command: ["^[Pp]arti ekle (.*)", "^[Pp]arti ekle"],
+    command: [
+      "^[Pp]arti ekle (.*)",
+      "^[Pp]arti ekle",
+      "^[Hh]appy[Hh]our ekle (.*)",
+      "^[Hh]appy[Hh]our ekle"
+    ],
     listensFor,
     targetController: happyHourAdd
+  },
+  {
+    command: ["^[Pp]arti sıradaki", "^[Hh]appy[Hh]our sıradaki"],
+    listensFor,
+    targetController: happyHourNext
   }
 ];
