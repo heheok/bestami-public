@@ -35,7 +35,7 @@ export const commands = [
   {
     command: [
       "^[Tt]atl[ıi] listele$",
-      "^[SŞsş]ekerim du[sş]tu$"
+      "^[SŞsş]ekerim d[üu][sş]t[üu]$"
     ],
     listensFor,
     targetController: dessertList
